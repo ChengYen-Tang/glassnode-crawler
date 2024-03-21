@@ -17,6 +17,7 @@ func main() {
 
 	apiInfos := list.New()
 	api.SetAddressApi(apiInfos, &rootFolder)
+	api.SetBridgesApi(apiInfos, &rootFolder)
 
 	for e := apiInfos.Front(); e != nil; e = e.Next() {
 		apiInfo := e.Value.(*models.APIInfo)
