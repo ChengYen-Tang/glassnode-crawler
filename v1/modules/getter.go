@@ -57,7 +57,10 @@ func (g *Getter) Download(apiUrl *string, saveFolderPath *string, fileName *stri
 
 	// 檢查目錄和檔案是否存在，如果目錄不存在則建立目錄，如果檔案存在則刪除檔案
 	if _, err := os.Stat(*saveFolderPath); os.IsNotExist(err) {
-		os.Mkdir(*saveFolderPath, os.ModePerm)
+		err := os.MkdirAll(*saveFolderPath, os.ModePerm)
+		if err != nil {
+			return errors.New("無法創建目標目錄: " + err.Error())
+		}
 	}
 	filePath := filepath.Join(*saveFolderPath, *fileName)
 	if _, err := os.Stat(filePath); err == nil {

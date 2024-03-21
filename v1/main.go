@@ -1,20 +1,25 @@
 package main
 
 import (
+	"container/list"
 	"fmt"
 	"strings"
 
+	api "github.com/ChengYen-Tang/glassnode-crawler/Api"
 	"github.com/ChengYen-Tang/glassnode-crawler/models"
 	"github.com/ChengYen-Tang/glassnode-crawler/modules"
 )
 
 func main() {
+	rootFolder := ""
 	cookieString := ""
 	getter := modules.NewGetter(&cookieString)
 
-	apiInfos := make([]*models.APIInfo, 0)
+	apiInfos := list.New()
+	api.SetAddressApi(apiInfos, &rootFolder)
 
-	for _, apiInfo := range apiInfos {
+	for e := apiInfos.Front(); e != nil; e = e.Next() {
+		apiInfo := e.Value.(*models.APIInfo)
 		err := getter.Download(&apiInfo.APIUrl, &apiInfo.SaveFolder, &apiInfo.FileName)
 		if err != nil {
 			fmt.Println(apiInfo.APIUrl)
