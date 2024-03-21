@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	api "github.com/ChengYen-Tang/glassnode-crawler/Api"
+	"github.com/ChengYen-Tang/glassnode-crawler/api"
 	"github.com/ChengYen-Tang/glassnode-crawler/models"
 	"github.com/ChengYen-Tang/glassnode-crawler/modules"
 )
@@ -18,6 +18,11 @@ func main() {
 	apiInfos := list.New()
 	api.SetAddressApi(apiInfos, &rootFolder)
 	api.SetBridgesApi(apiInfos, &rootFolder)
+	api.SetBlockchainApi(apiInfos, &rootFolder)
+	api.SetDefiApi(apiInfos, &rootFolder)
+	api.SetDerivativesApi(apiInfos, &rootFolder)
+
+	fmt.Println("API 數量:", apiInfos.Len())
 
 	for e := apiInfos.Front(); e != nil; e = e.Next() {
 		apiInfo := e.Value.(*models.APIInfo)

@@ -51,3 +51,16 @@ func GetAPIInfoTag(apiUrl string, folder *string, tag *string) *models.APIInfo {
 		FileName:   *tag + fileExtension,
 	}
 }
+
+func GetAPIInfoTwoTag(apiUrl string, folder *string, tag1 *string, tag2 *string) *models.APIInfo {
+	newUrl := fmt.Sprintf(apiUrl, *tag1, *tag2)
+	actionName, err := GetActionName(&newUrl)
+	if err != nil {
+		panic(err)
+	}
+	return &models.APIInfo{
+		APIUrl:     newUrl,
+		SaveFolder: filepath.Join(*folder, actionName, *tag1),
+		FileName:   *tag2 + fileExtension,
+	}
+}
