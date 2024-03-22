@@ -21,6 +21,9 @@ func main() {
 	api.SetBlockchainApi(apiInfos, &rootFolder)
 	api.SetDefiApi(apiInfos, &rootFolder)
 	api.SetDerivativesApi(apiInfos, &rootFolder)
+	api.SetDistributionApi(apiInfos, &rootFolder)
+	api.SetEntitiesApi(apiInfos, &rootFolder)
+	api.SetEth20Api(apiInfos, &rootFolder)
 
 	fmt.Println("API 數量:", apiInfos.Len())
 
