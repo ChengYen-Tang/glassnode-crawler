@@ -8,14 +8,22 @@ import (
 	"github.com/ChengYen-Tang/glassnode-crawler/api"
 	"github.com/ChengYen-Tang/glassnode-crawler/models"
 	"github.com/ChengYen-Tang/glassnode-crawler/modules"
+	"github.com/spf13/viper"
 )
 
 func main() {
-	rootFolder := ""
-	cookieString := ""
+	viper.SetConfigFile("./config.json")
+
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic("讀取設定檔錯誤: " + err.Error())
+	}
+
+	rootFolder := viper.GetString("rootFolder")
+	cookieString := viper.GetString("cookieString")
 	getter := modules.NewGetter(&cookieString)
 
-	apiInfos := list.New()
+	apiInfos := modules.NewTaskController(list.New())
 	api.SetAddressApi(apiInfos, &rootFolder)
 	api.SetBridgesApi(apiInfos, &rootFolder)
 	api.SetBlockchainApi(apiInfos, &rootFolder)
@@ -25,14 +33,14 @@ func main() {
 	api.SetEntitiesApi(apiInfos, &rootFolder)
 	api.SetEth20Api(apiInfos, &rootFolder)
 
-	fmt.Println("API 數量:", apiInfos.Len())
+	fmt.Println("API 數量:", apiInfos.ApiInfos.Len())
 
-	for e := apiInfos.Front(); e != nil; e = e.Next() {
+	for e := apiInfos.ApiInfos.Front(); e != nil; e = e.Next() {
 		apiInfo := e.Value.(*models.APIInfo)
 		err := getter.Download(&apiInfo.APIUrl, &apiInfo.SaveFolder, &apiInfo.FileName)
 		if err != nil {
 			fmt.Println(apiInfo.APIUrl)
-			if strings.Contains(err.Error(), "無效的 HTTP 狀態碼") {
+			if strings.Contains(err.Error(), "professional") {
 				fmt.Println(err.Error())
 			} else {
 				panic(err)
