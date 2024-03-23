@@ -32,6 +32,10 @@ func main() {
 	api.SetDistributionApi(apiInfos, &rootFolder)
 	api.SetEntitiesApi(apiInfos, &rootFolder)
 	api.SetEth20Api(apiInfos, &rootFolder)
+	api.SetFeesApi(apiInfos, &rootFolder)
+	api.SetIndicatorsApi(apiInfos, &rootFolder)
+	api.SetInstitutionsApi(apiInfos, &rootFolder)
+	api.SetLightningApi(apiInfos, &rootFolder)
 
 	fmt.Println("API 數量:", apiInfos.ApiInfos.Len())
 
