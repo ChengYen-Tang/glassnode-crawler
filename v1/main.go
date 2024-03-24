@@ -36,6 +36,10 @@ func main() {
 	api.SetIndicatorsApi(apiInfos, &rootFolder)
 	api.SetInstitutionsApi(apiInfos, &rootFolder)
 	api.SetLightningApi(apiInfos, &rootFolder)
+	api.SetMarketApi(apiInfos, &rootFolder)
+	api.SetMempoolApi(apiInfos, &rootFolder)
+	api.SetMiningApi(apiInfos, &rootFolder)
+	api.SetPointInTimeApi(apiInfos, &rootFolder)
 
 	fmt.Println("API 數量:", apiInfos.ApiInfos.Len())
 
