@@ -40,6 +40,9 @@ func main() {
 	api.SetMempoolApi(apiInfos, &rootFolder)
 	api.SetMiningApi(apiInfos, &rootFolder)
 	api.SetPointInTimeApi(apiInfos, &rootFolder)
+	api.SetProtocolsApi(apiInfos, &rootFolder)
+	api.SetSignalsApi(apiInfos, &rootFolder)
+	api.SetSupplyApi(apiInfos, &rootFolder)
 
 	fmt.Println("API 數量:", apiInfos.ApiInfos.Len())
 
@@ -48,7 +51,7 @@ func main() {
 		err := getter.Download(&apiInfo.APIUrl, &apiInfo.SaveFolder, &apiInfo.FileName)
 		if err != nil {
 			fmt.Println(apiInfo.APIUrl)
-			if strings.Contains(err.Error(), "professional") {
+			if strings.Contains(err.Error(), "professional") || strings.Contains(err.Error(), "No Content") {
 				fmt.Println(err.Error())
 			} else {
 				panic(err)
