@@ -43,6 +43,7 @@ func main() {
 	api.SetProtocolsApi(apiInfos, &rootFolder)
 	api.SetSignalsApi(apiInfos, &rootFolder)
 	api.SetSupplyApi(apiInfos, &rootFolder)
+	api.SetTransactionsApi(apiInfos, &rootFolder)
 
 	fmt.Println("API 數量:", apiInfos.ApiInfos.Len())
 
