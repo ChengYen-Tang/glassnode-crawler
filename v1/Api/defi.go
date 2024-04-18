@@ -8,6 +8,7 @@ import (
 
 func SetDefiApi(tc *modules.TaskController, rootFolder *string) {
 	folder := filepath.Join(*rootFolder, "Defi")
+	symbol := "ETH"
 
-	tc.GetAPIInfoDefault("https://api.glassnode.com/v1/metrics/defi/total_value_locked?a=ETH&f=CSV", &folder, false)
+	tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/defi/total_value_locked?a=%s&f=CSV", &folder, &symbol, false)
 }

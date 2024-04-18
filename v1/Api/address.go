@@ -9,8 +9,9 @@ import (
 func SetAddressApi(tc *modules.TaskController, rootFolder *string) {
 	folder := filepath.Join(*rootFolder, "Address")
 
-	tc.GetAPIInfoDefault("https://api.glassnode.com/v1/metrics/addresses/accumulation_count?a=BTC&f=CSV", &folder, false)
-	tc.GetAPIInfoDefault("https://api.glassnode.com/v1/metrics/addresses/accumulation_balance?a=BTC&f=CSV", &folder, true)
+	btc_symbol := "BTC"
+	tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/addresses/accumulation_count?a=%s&f=CSV", &folder, &btc_symbol, false)
+	tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/addresses/accumulation_balance?a=%s&f=CSV", &folder, &btc_symbol, true)
 	symbols := [...]string{"BTC", "ETH"}
 	for _, symbol := range symbols {
 		tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/addresses/active_count?a=%s&i=1h&f=CSV", &folder, &symbol, false)
@@ -32,7 +33,8 @@ func SetAddressApi(tc *modules.TaskController, rootFolder *string) {
 		tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/addresses/min_10k_count?a=%s&i=1h&f=CSV", &folder, &symbol, false)
 		tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/addresses/min_1k_count?a=%s&i=1h&f=CSV", &folder, &symbol, false)
 	}
-	tc.GetAPIInfoDefault("https://api.glassnode.com/v1/metrics/addresses/min_32_count?a=ETH&i=1h&f=CSV", &folder, false)
+	eth_symbol := "ETH"
+	tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/addresses/min_32_count?a=%s&i=1h&f=CSV", &folder, &eth_symbol, false)
 	for _, symbol := range symbols {
 		tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/addresses/non_zero_count?a=%s&i=1h&f=CSV", &folder, &symbol, false)
 		tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/addresses/sending_to_exchanges_count?a=%s&i=1h&f=CSV", &folder, &symbol, false)
