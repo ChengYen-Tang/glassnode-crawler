@@ -40,10 +40,14 @@ func SetMarketApi(tc *modules.TaskController, rootFolder *string) {
 			tc.GetAPIInfoTwoTag("https://api.glassnode.com/v1/metrics/market/spot_cvd_sum?a=%s&e=%s&i=1h&f=CSV", &folder, &symbol, &exchange, true)
 			tc.GetAPIInfoTwoTag("https://api.glassnode.com/v1/metrics/market/spot_selling_volume_sum?a=%s&e=%s&i=1h&f=CSV", &folder, &symbol, &exchange, true)
 			tc.GetAPIInfoTwoTag("https://api.glassnode.com/v1/metrics/market/spot_volume_daily_sum?a=%s&e=%s&i=1h&f=CSV", &folder, &symbol, &exchange, true)
+			tc.GetAPIInfoTwoTag("https://api.glassnode.com/v1/metrics/market/spot_volume_sum_intraday?a=%s&e=%s&i=1h&f=CSV", &folder, &symbol, &exchange, true)
 		}
 
 		tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/market/spot_volume_daily_latest?a=%s&i=10m&f=CSV", &folder, &symbol, true)
+		tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/market/spot_volume_daily_sum_all?a=%s&i=1h&f=CSV", &folder, &symbol, true)
+		tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/market/amer_30d_price_change?a=%s&i=24h&f=CSV", &folder, &symbol, true)
 	}
 	tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/market/deltacap_usd?a=%s&i=1h&f=CSV", &folder, &btcSymbol, false)
 	tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/market/mvrv_more_155?a=%s&i=1h&f=CSV", &folder, &btcSymbol, false)
+	tc.GetAPIInfoTag("https://api.glassnode.com/v1/metrics/market/mvrv_less_155?a=%s&i=1h&f=CSV", &folder, &btcSymbol, false)
 }

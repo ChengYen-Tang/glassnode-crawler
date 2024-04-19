@@ -4,6 +4,7 @@ import (
 	"container/list"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/ChengYen-Tang/glassnode-crawler/api"
 	"github.com/ChengYen-Tang/glassnode-crawler/models"
@@ -54,6 +55,8 @@ func main() {
 			fmt.Println(apiInfo.APIUrl)
 			if strings.Contains(err.Error(), "professional") || strings.Contains(err.Error(), "No Content") {
 				fmt.Println(err.Error())
+				// delay 1 second
+				time.Sleep(time.Millisecond * 500)
 			} else {
 				panic(err)
 			}
